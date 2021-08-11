@@ -2,7 +2,7 @@ const express = require("express");
 
 const authRoutes = require("./routes/authRoute");
 const userRoutes = require("./routes/userRoute");
-// const messageRoutes = require("./routes/messageRoute");
+
 const itemRoutes = require("./routes/itemRoute");
 
 const passport = require("passport");
@@ -23,7 +23,6 @@ app.use(authRoutes);
 app.use(userRoutes);
 app.use("/items", itemRoutes);
 app.use("/media", express.static(path.join(__dirname, "media")));
-// app.use("/messages", messageRoutes);
 
 app.use((err, req, res, next) => {
   res.status(err.status || 500).json({
