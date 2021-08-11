@@ -35,16 +35,13 @@ exports.itemCreate = async (req, res, next) => {
       price: req.body.price,
       category: req.body.category,
     };
-
     const newItem = await Item.create(req.body);
-    console.log("new item", newItem.dataValues);
     const idsArry = users.map(
       (user) => (user = { userId: user, itemId: newItem.dataValues.id })
     );
-    console.log(idsArry);
+
     UserItems.bulkCreate(idsArry);
     res.status(201).json(newItem.dataValues);
-    console.log(newItem.dataValues);
   } catch (error) {
     next(error);
   }
@@ -55,6 +52,21 @@ exports.itemDelete = async (req, res, next) => {
     // await UserItems.destroy({ where: { itemId: req.item.id } });
     await req.item.destroy();
     res.status(204).end();
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.itemUpdate = async (req, res, next) => {
+  try {
+    req.body = {
+      name: req.body.name,
+      image: req.body.image,
+      price: req.body.price,
+      category: req.body.category,
+    };
+    await req.item.update(req.body);
+    res.status(201).json(req.item);
   } catch (error) {
     next(error);
   }
