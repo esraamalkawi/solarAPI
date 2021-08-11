@@ -10,6 +10,7 @@ const {
 
   itemCreate,
   fetchItem,
+  itemUpdate,
 } = require("../controllers/itemController");
 
 router.param("itemId", async (req, res, next, itemId) => {
@@ -37,6 +38,12 @@ router.delete(
   "/:itemId",
   passport.authenticate("jwt", { session: false }),
   itemDelete
+);
+
+router.put(
+  "/:itemId",
+  passport.authenticate("jwt", { session: false }),
+  itemUpdate
 );
 
 module.exports = router;
