@@ -1,6 +1,6 @@
-const { User } = require("../db/models");
-
 const bcrypt = require("bcrypt");
+
+const { User,UserItems } = require("../db/models");
 
 exports.userUpdate = async (req, res, next) => {
   try {
@@ -41,6 +41,17 @@ exports.userUpdate = async (req, res, next) => {
 
     const token = generateToken(foundUser);
     res.json({ token });
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.userItemList= async (req, res, next) => {
+  try {
+    const userItem = await UserItems.findAll({
+      attributes: { exclude: ["createdAt"] },
+    });
+    res.json(userItem);
   } catch (error) {
     next(error);
   }
