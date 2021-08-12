@@ -5,9 +5,11 @@ const router = express.Router();
 
 const { userUpdate, userItemList } = require("../controllers/userController");
 router.get("/myItems", userItemList);
+
 router.put(
-  "/:userId",
+  "/profileUpdate",
   passport.authenticate("jwt", { session: false }),
+
   userUpdate
 );
 
