@@ -13,9 +13,6 @@ exports.userItemList = async (req, res, next) => {
 
 exports.userUpdate = async (req, res, next) => {
   try {
-    if (req.file) {
-      req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
-    }
     await req.user.update(req.body);
     res.status(201).json(req.user);
   } catch (error) {
