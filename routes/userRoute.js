@@ -7,7 +7,7 @@ const { userUpdate, userItemList } = require("../controllers/userController");
 router.get("/myItems", userItemList);
 
 router.put(
-  "/profileUpdate",
+  "/profile",
   passport.authenticate("jwt", { session: false }),
 
   userUpdate
