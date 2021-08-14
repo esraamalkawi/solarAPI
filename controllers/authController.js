@@ -24,6 +24,7 @@ exports.signin = async (req, res) => {
 const generateToken = (user) => {
   const payload = {
     id: user.id,
+    score: user.score,
     username: user.username,
     exp: Date.now() + JWT_EXPIRATION_MS,
   };
