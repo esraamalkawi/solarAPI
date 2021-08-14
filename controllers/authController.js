@@ -10,7 +10,7 @@ exports.signup = async (req, res, next) => {
     req.body.password = hashedPassword;
     const newUser = await User.create(req.body);
     const token = generateToken(newUser);
-    res.status(201).json(token);
+    res.status(201).json({token});
   } catch (error) {
     next(error);
   }
