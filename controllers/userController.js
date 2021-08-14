@@ -29,9 +29,8 @@ exports.userUpdate = async (req, res, next) => {
     const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
     req.body.password = hashedPassword;
     await req.user.update(req.body);
-  
     const token = generateToken(req.user);
-    res.status(201).json({token});
+    res.status(201).json({ token });
   } catch (error) {
     next(error);
   }
