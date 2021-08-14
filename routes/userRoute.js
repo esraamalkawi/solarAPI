@@ -3,7 +3,7 @@ const passport = require("passport");
 
 const router = express.Router();
 
-const { userUpdate, userItemList } = require("../controllers/userController");
+const { userUpdate, userItemList, scoreUpdate } = require("../controllers/userController");
 router.get("/myItems", userItemList);
 
 router.put(
@@ -12,5 +12,6 @@ router.put(
 
   userUpdate
 );
-
+router.put(
+  "/test",scoreUpdate)
 module.exports = router;

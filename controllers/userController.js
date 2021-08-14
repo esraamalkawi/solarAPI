@@ -1,4 +1,4 @@
-const { UserItems } = require("../db/models");
+const { UserItems, User } = require("../db/models");
 const jwt = require("jsonwebtoken");
 const { JWT_EXPIRATION_MS, JWT_SECRET } = require("../config/keys");
 const bcrypt = require("bcrypt");
@@ -31,6 +31,20 @@ exports.userUpdate = async (req, res, next) => {
     await req.user.update(req.body);
     const token = generateToken(req.user);
     res.status(201).json({ token });
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.scoreUpdate = async (req, res, next) => {
+  try {
+    // req.body = {
+    //   username: req.body.username,
+    //   score: req.body.score,
+      
+    // };
+    await User.update(req.body ,{ where: {id: req.body.id}});
+    res.status(201).json(req.body);
   } catch (error) {
     next(error);
   }
