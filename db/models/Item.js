@@ -17,5 +17,17 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
   });
+
+  //relations
+  Item.associate = (models) => {
+    models.User.hasMany(Item, {
+      foreignKey: "userId",
+      // allowNull: false,
+      as: "item",
+    });
+    Item.belongsTo(models.User, {
+      foreignKey: "userId",
+    });
+  };
   return Item;
 };
