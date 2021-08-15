@@ -2,10 +2,17 @@ const { UserItems, User } = require("../db/models");
 const jwt = require("jsonwebtoken");
 const { JWT_EXPIRATION_MS, JWT_SECRET } = require("../config/keys");
 const bcrypt = require("bcrypt");
+const { Op } = require("sequelize");
+
 exports.userItemList = async (req, res, next) => {
   try {
     const userItem = await UserItems.findAll({
       attributes: { exclude: ["createdAt"] },
+      where: {
+        userId: {
+          [Op.eq]: req.user.id,
+        },
+      },
     });
     res.json(userItem);
   } catch (error) {
@@ -41,9 +48,9 @@ exports.scoreUpdate = async (req, res, next) => {
     // req.body = {
     //   username: req.body.username,
     //   score: req.body.score,
-      
+
     // };
-    await User.update(req.body ,{ where: {id: req.body.id}});
+    await User.update(req.body, { where: { id: req.body.id } });
     res.status(201).json(req.body);
   } catch (error) {
     next(error);
