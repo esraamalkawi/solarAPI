@@ -3,8 +3,16 @@ const passport = require("passport");
 
 const router = express.Router();
 
-const { userUpdate, userItemList, scoreUpdate } = require("../controllers/userController");
-router.get("/myItems", userItemList);
+const {
+  userUpdate,
+  userItemList,
+  scoreUpdate,
+} = require("../controllers/userController");
+router.get(
+  "/myItems",
+  passport.authenticate("jwt", { session: false }),
+  userItemList
+);
 
 router.put(
   "/profile",
@@ -12,6 +20,5 @@ router.put(
 
   userUpdate
 );
-router.put(
-  "/test",scoreUpdate)
+router.put("/test", scoreUpdate);
 module.exports = router;
