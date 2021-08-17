@@ -7,6 +7,7 @@ const {
   userUpdate,
   userItemList,
   scoreUpdate,
+  UserItemCreate,
 } = require("../controllers/userController");
 router.get(
   "/myItems",
@@ -21,4 +22,10 @@ router.put(
   userUpdate
 );
 router.put("/test", scoreUpdate);
+
+router.post(
+  "/myItems/:itemId",
+  passport.authenticate("jwt", { session: false }),
+  UserItemCreate
+);
 module.exports = router;

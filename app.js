@@ -3,7 +3,6 @@ const express = require("express");
 const authRoutes = require("./routes/authRoute");
 const userRoutes = require("./routes/userRoute");
 const spaceImgRoute = require("./routes/spaceImgRoute");
-const userStoreRoute = require("./routes/userStoreRoute");
 const itemRoutes = require("./routes/itemRoute");
 
 const passport = require("passport");
@@ -22,10 +21,8 @@ passport.use(jwtStrategy);
 
 app.use(authRoutes);
 app.use(userRoutes);
-app.use(userStoreRoute);
 app.use("/items", itemRoutes);
 app.use("/images", spaceImgRoute);
-
 app.use("/media", express.static(path.join(__dirname, "media")));
 
 app.use((err, req, res, next) => {

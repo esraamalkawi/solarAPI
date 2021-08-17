@@ -19,6 +19,20 @@ exports.userItemList = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.UserItemCreate = async (req, res, next) => {
+  try {
+    const newUserItem = await UserItems.create({
+      name: req.body.name,
+      itemId: req.params.itemId,
+      userId: req.user.id,
+    });
+    res.status(201).json(newUserItem);
+  } catch (error) {
+    next(error);
+  }
+};
+
 const generateToken = (user) => {
   const payload = {
     id: user.id,
