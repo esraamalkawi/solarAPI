@@ -64,7 +64,7 @@ exports.scoreUpdate = async (req, res, next) => {
     //   score: req.body.score,
 
     // };
-    await User.update(req.body, { where: { id: req.body.id } });
+    await User.update(req.body, { where: { id: req.user.id } });
     res.status(201).json(req.body);
   } catch (error) {
     next(error);

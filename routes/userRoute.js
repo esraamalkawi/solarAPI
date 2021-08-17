@@ -21,7 +21,11 @@ router.put(
 
   userUpdate
 );
-router.put("/test", scoreUpdate);
+router.put(
+  "/score",
+  passport.authenticate("jwt", { session: false }),
+  scoreUpdate
+);
 
 router.post(
   "/myItems/:itemId",
