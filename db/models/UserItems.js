@@ -1,5 +1,10 @@
 module.exports = (sequelize, DataTypes) => {
-  const UserItem = sequelize.define("UserItems", {});
+  const UserItem = sequelize.define("UserItems", {
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  });
 
   UserItem.associate = (models) => {
     models.User.belongsToMany(models.Item, {
