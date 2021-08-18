@@ -1,4 +1,4 @@
-const { UserItems, User } = require("../db/models");
+const { UserItems, User, Item } = require("../db/models");
 const jwt = require("jsonwebtoken");
 const { JWT_EXPIRATION_MS, JWT_SECRET } = require("../config/keys");
 const bcrypt = require("bcrypt");
@@ -19,6 +19,15 @@ exports.userItemList = async (req, res, next) => {
     next(error);
   }
 };
+exports.myUser = async (req, res, next) => {
+  try {
+   
+   
+    res.json(req.user);
+  } catch (error) {
+    next(error);
+  }
+};
 
 exports.UserItemCreate = async (req, res, next) => {
   try {
@@ -27,6 +36,11 @@ exports.UserItemCreate = async (req, res, next) => {
       itemId: req.params.itemId,
       userId: req.user.id,
     });
+    console.log("here pls", User)
+    const myItem= await Item.findByPk(req.params.itemId) 
+     await req.user.update({
+       score: req.user.score -myItem.price
+     })
     res.status(201).json(newUserItem);
   } catch (error) {
     next(error);
