@@ -8,11 +8,17 @@ const {
   userItemList,
   scoreUpdate,
   UserItemCreate,
+  myUser,
 } = require("../controllers/userController");
 router.get(
   "/myItems",
   passport.authenticate("jwt", { session: false }),
   userItemList
+);
+router.get(
+  "/myUser",
+  passport.authenticate("jwt", { session: false }),
+  myUser
 );
 
 router.put(
