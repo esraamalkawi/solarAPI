@@ -21,6 +21,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue: 0,
     },
+    crisisCoin: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
+    },
   });
   SequelizeSlugify.slugifyModel(User, {
     source: ["username"],
