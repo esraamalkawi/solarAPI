@@ -12,6 +12,7 @@ const cors = require("cors");
 const path = require("path");
 
 const app = express();
+app.use(express.static('public'));
 
 app.use(cors());
 app.use(express.json());
