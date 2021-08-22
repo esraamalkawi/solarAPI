@@ -9,6 +9,7 @@ const {
   scoreUpdate,
   UserItemCreate,
   myUser,
+  checkout,
 } = require("../controllers/userController");
 router.get(
   "/myItems",
@@ -38,4 +39,10 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   UserItemCreate
 );
+
+router.post('/create-checkout-session',
+passport.authenticate("jwt", { session: false }),
+checkout
+);
+
 module.exports = router;
