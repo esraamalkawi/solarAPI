@@ -1,4 +1,3 @@
-const stripe = require('stripe')('sk_test_51JQYTnDsGZQiZyXQfOuGcY0q6hQYRR3jmdI9e9j5SqGbRxB7YyodD4844u5JwrAeFGwa22RHJkBOOy0MIjp0c8HB00JohV6oR6');
 const { UserItems, User, Item } = require("../db/models");
 const jwt = require("jsonwebtoken");
 const { JWT_EXPIRATION_MS, JWT_SECRET } = require("../config/keys");
@@ -22,8 +21,6 @@ exports.userItemList = async (req, res, next) => {
 };
 exports.myUser = async (req, res, next) => {
   try {
-   
-   
     res.json(req.user);
   } catch (error) {
     next(error);
@@ -37,11 +34,11 @@ exports.UserItemCreate = async (req, res, next) => {
       itemId: req.params.itemId,
       userId: req.user.id,
     });
-    console.log("here pls", User)
-    const myItem= await Item.findByPk(req.params.itemId) 
-     await req.user.update({
-       score: req.user.score -myItem.price
-     })
+    console.log("here pls", User);
+    const myItem = await Item.findByPk(req.params.itemId);
+    await req.user.update({
+      score: req.user.score - myItem.price,
+    });
     res.status(201).json(newUserItem);
   } catch (error) {
     next(error);
@@ -74,39 +71,9 @@ exports.userUpdate = async (req, res, next) => {
 
 exports.scoreUpdate = async (req, res, next) => {
   try {
-    
     await User.update(req.body, { where: { id: req.user.id } });
     res.status(201).json(req.body);
   } catch (error) {
     next(error);
   }
 };
-
-exports.checkout = async (req, res,next) => { try {
-  console.log(req.body)
-  const YOUR_DOMAIN = 'http://localhost:3000/checkout';
-  const session = await stripe.checkout.sessions.create({
-    payment_method_types: [
-      'card',
-    ],
-    line_items: [
-      {
-        // TODO: replace this with the `price` of the product you want to sell
-        amount: 2000,
-  currency: 'usd',
-  
-      },
-    ],
-    mode: 'payment',
-    success_url: `${YOUR_DOMAIN}?success=true`,
-    cancel_url: `${YOUR_DOMAIN}?canceled=true`,
-  })
-
-  res.redirect(303, session.url)
-
-} catch (error) {
-  next(error); 
-}
-}
-
-  

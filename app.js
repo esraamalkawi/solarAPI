@@ -1,9 +1,14 @@
 const express = require("express");
+const stripe = require("stripe")(
+  "pk_test_51JQYTnDsGZQiZyXQfbiKeQ0dCiqSOIpOI9fDoU4QGSdShU9sgYs1JyyuExmYFQIzWNLVV9nRPgl9NaCIsGCk7FTU00JzwEjZ8r"
+);
+require("dotenv").config();
 
 const authRoutes = require("./routes/authRoute");
 const userRoutes = require("./routes/userRoute");
 const spaceImgRoute = require("./routes/spaceImgRoute");
 const itemRoutes = require("./routes/itemRoute");
+const stripeRoutes = require("./routes/stripeRoute");
 
 const passport = require("passport");
 const { localStrategy, jwtStrategy } = require("./middleware/passport");
@@ -12,7 +17,7 @@ const cors = require("cors");
 const path = require("path");
 
 const app = express();
-app.use(express.static('public'));
+app.use(express.static("public"));
 
 app.use(cors());
 app.use(express.json());
@@ -22,6 +27,7 @@ passport.use(jwtStrategy);
 
 app.use(authRoutes);
 app.use(userRoutes);
+app.use(stripeRoutes);
 app.use("/items", itemRoutes);
 app.use("/images", spaceImgRoute);
 app.use("/media", express.static(path.join(__dirname, "media")));
