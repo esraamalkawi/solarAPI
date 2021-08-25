@@ -9,6 +9,9 @@ const userRoutes = require("./routes/userRoute");
 const spaceImgRoute = require("./routes/spaceImgRoute");
 const itemRoutes = require("./routes/itemRoute");
 const stripeRoutes = require("./routes/stripeRoute");
+const videoRoute = require("./routes/videoRoute")
+
+
 
 const passport = require("passport");
 const { localStrategy, jwtStrategy } = require("./middleware/passport");
@@ -30,6 +33,7 @@ app.use(userRoutes);
 app.use(stripeRoutes);
 app.use("/items", itemRoutes);
 app.use("/images", spaceImgRoute);
+app.use("/videos", videoRoute);
 app.use("/media", express.static(path.join(__dirname, "media")));
 
 app.use((err, req, res, next) => {
