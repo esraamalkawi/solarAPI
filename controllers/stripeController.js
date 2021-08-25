@@ -1,4 +1,6 @@
-const stripe = require("stripe")(process.env.STRIPE_SECRET_TEST);
+const stripe = require("stripe")(
+  "sk_test_51JQYTnDsGZQiZyXQfOuGcY0q6hQYRR3jmdI9e9j5SqGbRxB7YyodD4844u5JwrAeFGwa22RHJkBOOy0MIjp0c8HB00JohV6oR6"
+);
 exports.payment = async (req, res) => {
   let { amount } = req.body;
   try {
@@ -9,11 +11,8 @@ exports.payment = async (req, res) => {
     });
     console.log("Payment", payment);
     res.json({
-      clienSecret: paymentIntent.client_secret,
+      clienSecret: payment.client_secret,
     });
-    // res.send({
-    //   clientSecret: paymentIntent.client_secret,
-    // });
   } catch (error) {
     console.log("Error", error);
     res.json({
@@ -22,30 +21,3 @@ exports.payment = async (req, res) => {
     });
   }
 };
-
-// exports.payment = async (req, res) => {
-//   let { amount, id } = req.body;
-//   try{
-//     console.log("try", req.body);
-//     const payment = await stripe.paymentIntents.create({
-//       amount,
-//       currency: "USD",
-//       //payment_method_types: ["card"],
-//       // description: "company",
-//       // payment_method: id,
-//       // confirm: true,
-//     });
-//     console.log("Payment", payment);
-//     res.json({
-//       clienSecret: paymentIntent.client_secret,
-//       // message: "Payment successful",
-//       // success: true,
-//     });
-//   } catch (error) {
-//     console.log("Error", error);
-//     res.json({
-//       message: "Payment failed",
-//       success: false,
-//     });
-//   }
-// };
