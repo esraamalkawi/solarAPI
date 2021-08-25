@@ -9,18 +9,13 @@ const {
   scoreUpdate,
   UserItemCreate,
   myUser,
-  checkout,
 } = require("../controllers/userController");
 router.get(
   "/myItems",
   passport.authenticate("jwt", { session: false }),
   userItemList
 );
-router.get(
-  "/myUser",
-  passport.authenticate("jwt", { session: false }),
-  myUser
-);
+router.get("/myUser", passport.authenticate("jwt", { session: false }), myUser);
 
 router.put(
   "/profile",
@@ -38,11 +33,6 @@ router.post(
   "/myItems/:itemId",
   passport.authenticate("jwt", { session: false }),
   UserItemCreate
-);
-
-router.post('/create-checkout-session',
-passport.authenticate("jwt", { session: false }),
-checkout
 );
 
 module.exports = router;
