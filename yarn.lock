@@ -18,9 +18,9 @@
     tar "^6.1.0"
 
 "@types/node@*":
-  version "16.4.13"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.4.13.tgz#7dfd9c14661edc65cccd43a29eb454174642370d"
-  integrity sha512-bLL69sKtd25w7p1nvg9pigE4gtKVpGTPojBFLMkGHXuUgap2sLqQt2qUnqmVCDfzGUL0DRNZP+1prIZJbMeAXg==
+  version "16.6.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.6.0.tgz#0d5685f85066f94e97f19e8a67fe003c5fadacc4"
+  integrity sha512-OyiZPohMMjZEYqcVo/UJ04GyAxXOJEZO/FpzyXxcH4r/ArrVoXHf4MbUrkLp0Tz7/p1mMKpo5zJ6ZHl8XBNthQ==
 
 abbrev@1:
   version "1.1.1"
@@ -1503,9 +1503,9 @@ strip-ansi@^5.0.0, strip-ansi@^5.1.0, strip-ansi@^5.2.0:
     ansi-regex "^4.1.0"
 
 tar@^6.1.0:
-  version "6.1.7"
-  resolved "https://registry.yarnpkg.com/tar/-/tar-6.1.7.tgz#c566d1107d38b09e92983a68db5534fc7f6cab42"
-  integrity sha512-PBoRkOJU0X3lejJ8GaRCsobjXTgFofRDSPdSUhRSdlwJfifRlQBwGXitDItdGFu0/h0XDMCkig0RN1iT7DBxhA==
+  version "6.1.8"
+  resolved "https://registry.yarnpkg.com/tar/-/tar-6.1.8.tgz#4fc50cfe56511c538ce15b71e05eebe66530cbd4"
+  integrity sha512-sb9b0cp855NbkMJcskdSYA7b11Q8JsX4qe4pyUAfHp+Y6jBjJeek2ZVlwEfWayshEIwlIzXx0Fain3QG9JPm2A==
   dependencies:
     chownr "^2.0.0"
     fs-minipass "^2.0.0"
